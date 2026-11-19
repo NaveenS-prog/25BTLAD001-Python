@@ -27,7 +27,7 @@ This repository contains the complete laboratory submissions and projects for Se
 │   ├── Mini Project 2/                  # Student Grading Automation System
 │   ├── Mini Project 3/                  # Attendance Tracker & Sales Data Analyzer
 │   └── Lab Tasks/                       # Assignment Tasks 1 through 18
-├── screenshots/                         # Output terminal screenshots for Experiential Learning
+├── screenshots/                         # Output screenshot for Experiential Learning
 └── README.md                            # Comprehensive coursework documentation
 ```
 
@@ -38,42 +38,19 @@ This repository contains the complete laboratory submissions and projects for Se
 A robust, cryptographically sound command-line credential vault built in Python utilizing object serialization via the standard `pickle` module, salted PBKDF2 key derivation, and AES symmetric encryption.
 
 ### Core Security & Architectural Features
-- **Object Serialization with `pickle`:** Serializes structured dictionary schemas (service metadata, encrypted payloads, timestamps) directly to persistent binary files (`vault.pkl`) using `pickle.dump()` and reads them with `pickle.load()`.
-- **PBKDF2-HMAC-SHA256 Key Derivation:** Derives a 256-bit symmetric encryption key using 100,000 hashing rounds and an unpredictable 16-byte cryptographic salt (`os.urandom(16)`).
-- **Dual-Layer Symmetric Encryption:** Passwords are encrypted before serialization via Fernet (AES-128-CBC with HMAC-SHA256 authentication) with a pure-Python SHA-256 stream cipher fallback.
+- **Object Serialization with `pickle`:** Serializes structured dictionary schemas directly to persistent binary files (`vault.pkl`) using `pickle.dump()` and reads them with `pickle.load()`.
+- **PBKDF2-HMAC-SHA256 Key Derivation:** Derives a 256-bit symmetric encryption key using 100,000 hashing rounds and a random 16-byte cryptographic salt (`os.urandom(16)`).
+- **Dual-Layer Symmetric Encryption:** Passwords are encrypted before serialization via AES-CBC with a pure-Python stream cipher fallback.
 - **Constant-Time Verification:** Uses `secrets.compare_digest()` to eliminate timing attacks during master password authentication.
 - **Cryptographic Password Generator:** Generates high-entropy passwords using Python's `secrets` module (CSPRNG).
-- **Emergency Recovery (Security Questions):** Key unwrapping protocol using personal security questions to recover vaults in case of a forgotten master password.
 
 ---
 
-### Output Screenshots & Execution Walkthrough
+### Program Output Screenshot
 
-#### 1. Vault Authentication & Main Interactive Menu
-Upon execution, the system prompts for the master password using terminal-masked input (`getpass`), performs PBKDF2 key derivation, and unlocks the encrypted vault.
+The execution screenshot below demonstrates the complete lifecycle of the application: unlocking the vault with the master password, viewing the main menu, listing all stored accounts, and retrieving & decrypting credentials.
 
-![01 - Vault Authentication & Main Menu](screenshots/01_vault_unlock_and_menu.png)
-
----
-
-#### 2. Stored Accounts Listing & Credential Decryption
-Displays all encrypted credentials stored in `vault.pkl` in a clean formatted tabular view, and allows instant search and real-time AES decryption by service or username.
-
-![02 - Stored Accounts & Decrypted Retrieval](screenshots/02_list_and_search_accounts.png)
-
----
-
-#### 3. CSPRNG Password Generator & Encrypted Account Addition
-Generates high-entropy random credentials (131+ bits of entropy) using the `secrets` module and serializes newly encrypted entries directly into `vault.pkl`.
-
-![03 - Password Generator & Account Addition](screenshots/03_add_account_and_generator.png)
-
----
-
-#### 4. Automated Unit Test Suite (`test_password_manager.py`)
-All 11 automated security, CRUD, serialization, and tampering test cases passing cleanly with 100% test coverage.
-
-![04 - Automated Security & Serialization Tests](screenshots/04_automated_unit_tests.png)
+![Experiential Learning Output](screenshots/output.png)
 
 ---
 
@@ -82,12 +59,7 @@ All 11 automated security, CRUD, serialization, and tampering test cases passing
 ### Running Experiential Learning (Password Manager):
 ```bash
 cd "25BTLAD001-Experiential Learning"
-
-# Launch interactive CLI
 python3 main.py
-
-# Run automated unit test suite
-python3 test_password_manager.py -v
 ```
 
 ### Running Problem Solving & Mini Projects:
